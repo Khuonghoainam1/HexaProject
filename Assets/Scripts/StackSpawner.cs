@@ -10,7 +10,7 @@ namespace NamCore
         [Header("Element:")]
         [SerializeField] private Transform m_stackPositionParent;
         [SerializeField] private Hexagon m_hexagonPrefab;
-        [SerializeField] private HexStack m_hexagonStackPrefab;
+        [SerializeField] private HexStack m_hexagonStack;
 
         [Header("Setting:")]
         [NaughtyAttributes.MinMaxSlider(2, 8)]
@@ -31,7 +31,7 @@ namespace NamCore
 
         private void GenerateStacks(Transform stackPositionParent)
         {
-            HexStack hexStack = Instantiate(m_hexagonStackPrefab, stackPositionParent.position, Quaternion.identity, stackPositionParent);
+            HexStack hexStack = Instantiate(m_hexagonStack, stackPositionParent.position, Quaternion.identity, stackPositionParent);
             hexStack.name = $"Stack {stackPositionParent.GetSiblingIndex()}";
 
             Color stackCorlor = colors[Random.Range(0, colors.Length)];
@@ -52,7 +52,7 @@ namespace NamCore
 
                 hexagonIntance.Configure(hexStack);
 
-                m_hexagonStackPrefab.Add(hexagonIntance);
+                hexStack.Add(hexagonIntance);
             }
         }
 

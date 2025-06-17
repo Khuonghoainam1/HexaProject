@@ -8,10 +8,11 @@ namespace NamCore
     {
         public List<Hexagon> Hexagons { get; private set; }
        
+
         public void Add(Hexagon hexagon)
         {
             if(Hexagons == null) 
-                Hexagons = new List<Hexagon>();
+               { Hexagons = new List<Hexagon>(); }
 
 
             Hexagons.Add(hexagon);

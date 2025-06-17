@@ -64,14 +64,12 @@ namespace NamCore
             }
             else
             {
-                DraggingAboveGridCell();
+                DraggingAboveGridCell(hit);
             }
         }
+    
+     
 
-        private void DraggingAboveGridCell()
-        {
-            Debug.Log("Here 2");
-        }
 
         private void DraggingAboveGround()
         {
@@ -91,6 +89,27 @@ namespace NamCore
                 m_currentHexStack.transform.position,
                 currentStackTargetPos,
                 Time.deltaTime * 30);
+        }
+        private void DraggingAboveGridCell(RaycastHit hit)
+        {
+            GridCell gridCell = hit.collider.GetComponent<GridCell>();
+
+            if (gridCell.IsOccupied)
+                DraggingAboveGround();
+            else
+                DraggingAboveNonOccupiedGridCell(gridCell);
+        }
+
+ 
+        private void DraggingAboveNonOccupiedGridCell(GridCell gridCell)
+        {
+            Vector3 currentStackTargetPos = gridCell.transform.parent.position.With(y: 2);
+
+            m_currentHexStack.transform.position = Vector3.MoveTowards(
+                m_currentHexStack.transform.position,
+                currentStackTargetPos,
+                Time.deltaTime * 30);
+
         }
 
 

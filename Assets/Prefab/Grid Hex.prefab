@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2424191269316081620}
   - component: {fileID: 8874037420511010685}
+  - component: {fileID: 6295068168079390501}
   m_Layer: 0
   m_Name: Grid Hex
   m_TagString: Untagged
@@ -55,6 +56,18 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -4575734979276873811, guid: cd6af039c671a384f8e6644b12f7a4e5, type: 3}
+--- !u!114 &6295068168079390501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8499235705832838296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b1a908b825a1f1459da048a04bb746e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3718704825969821099
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -66,6 +79,10 @@ PrefabInstance:
     - target: {fileID: 170792504039649130, guid: e2effbf4af12a194680f94c34826f2db, type: 3}
       propertyPath: m_Name
       value: 'Hexagon Render '
+      objectReference: {fileID: 0}
+    - target: {fileID: 170792504039649130, guid: e2effbf4af12a194680f94c34826f2db, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 654453837585020368, guid: e2effbf4af12a194680f94c34826f2db, type: 3}
       propertyPath: m_LocalPosition.x
@@ -111,7 +128,8 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: fffe83222ac82e642b2d376f71cf83af, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4005387274625517192, guid: e2effbf4af12a194680f94c34826f2db, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

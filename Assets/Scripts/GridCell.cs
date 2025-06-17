@@ -4,18 +4,17 @@ using UnityEngine;
 
 namespace NamCore
 {
+
     public class GridCell : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
-        {
-            
-        }
+        private HexStack m_stack;
 
-        // Update is called once per frame
-        void Update()
-        {
+
+      public bool IsOccupied { 
             
-        }
+            get => m_stack != null;
+
+
+            private set { } }
     }
 }
