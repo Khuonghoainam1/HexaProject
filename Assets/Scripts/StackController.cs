@@ -13,8 +13,20 @@ namespace NamCore
         [SerializeField] private LayerMask m_groundLayerMask;
 
 
-        private HexStack m_currentHexStack;
+        private HexStack m_currentStack;
         private Vector3 m_currentHexStackInitialPos;
+
+
+        [Header("Data")]
+        private GridCell m_targetCell;
+
+
+        [Header("Action")]
+
+        public static Action<GridCell> onStackPlanced;
+
+
+
 
         private void Update()
         {
@@ -27,11 +39,11 @@ namespace NamCore
             {
                 ManagerMouseDown();
             }
-            else if (Input.GetMouseButton(0) && m_currentHexStack != null)
+            else if (Input.GetMouseButton(0) && m_currentStack != null)
             {
                 ManagerMouseDrag();
             }
-            else if (Input.GetMouseButtonUp(0) && m_currentHexStack != null)
+            else if (Input.GetMouseButtonUp(0) && m_currentStack != null)
             {
                 ManagerMouseUp();
             }
@@ -47,8 +59,8 @@ namespace NamCore
                 return;
             }
 
-            m_currentHexStack = hit.collider.GetComponent<Hexagon>().HexStack;
-            m_currentHexStackInitialPos = m_currentHexStack.transform.position;
+            m_currentStack = hit.collider.GetComponent<Hexagon>().HexStack;
+            m_currentHexStackInitialPos = m_currentStack.transform.position;
         }
 
 
@@ -85,10 +97,13 @@ namespace NamCore
 
             Vector3 currentStackTargetPos = hit.point.With(y: 2);
 
-            m_currentHexStack.transform.position = Vector3.MoveTowards(
-                m_currentHexStack.transform.position,
+            m_currentStack.transform.position = Vector3.MoveTowards(
+                m_currentStack.transform.position,
                 currentStackTargetPos,
                 Time.deltaTime * 30);
+
+            m_targetCell = null;
+
         }
         private void DraggingAboveGridCell(RaycastHit hit)
         {
@@ -103,19 +118,38 @@ namespace NamCore
  
         private void DraggingAboveNonOccupiedGridCell(GridCell gridCell)
         {
-            Vector3 currentStackTargetPos = gridCell.transform.parent.position.With(y: 2);
+            Vector3 currentStackTargetPos = gridCell.transform.position.With(y: 2);
 
-            m_currentHexStack.transform.position = Vector3.MoveTowards(
-                m_currentHexStack.transform.position,
+            m_currentStack.transform.position = Vector3.MoveTowards(
+                m_currentStack.transform.position,
                 currentStackTargetPos,
                 Time.deltaTime * 30);
+
+           m_targetCell = gridCell;
 
         }
 
 
         private void ManagerMouseUp()
         {
+            if(m_targetCell == null)
+            {
+                m_currentStack.transform.position = m_currentHexStackInitialPos;
+                m_currentStack = null;
+                return;
+            }
 
+            m_currentStack.transform.position = m_targetCell.transform.position.With(y: .2f);
+            m_currentStack.transform.SetParent(m_targetCell.transform);
+            m_currentStack.Place();
+
+
+            m_targetCell.AssignStack(m_currentStack);
+
+
+            m_targetCell = null;
+            onStackPlanced?.Invoke(m_targetCell);
+            m_currentStack = null;
         }
         private Ray GetClickRay() => Camera.main.ScreenPointToRay(Input.mousePosition);
     }

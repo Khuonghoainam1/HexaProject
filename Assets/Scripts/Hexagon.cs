@@ -8,6 +8,7 @@ namespace NamCore
     {
         [Header("Element")]
         [SerializeField] private new  Renderer m_renderer;
+        [SerializeField] private new  Collider m_collider;
         public HexStack HexStack {  get; private set; }
 
         public Color Color
@@ -20,5 +21,7 @@ namespace NamCore
         {
             HexStack = hexStack;
         }
+
+        public void DisableCollider() => m_collider.enabled = false;
     }
 }

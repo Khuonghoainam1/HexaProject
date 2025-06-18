@@ -16,5 +16,12 @@ namespace NamCore
 
 
             private set { } }
+        
+
+        public void AssignStack(HexStack stack)
+        {
+            this.m_stack = stack;
+
+        }
     }
 }

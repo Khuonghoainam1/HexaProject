@@ -17,6 +17,33 @@ namespace NamCore
         [SerializeField] private Vector2Int minMaxHexCount;
         [SerializeField] private Color[] colors;
 
+        private int m_stackCounter;
+
+
+        private void Awake()
+        {
+            Application.targetFrameRate = 60;
+            StackController.onStackPlanced += StackPlacedCellBack;
+        }
+
+        private void OnDestroy()
+        {
+            StackController.onStackPlanced -= StackPlacedCellBack;
+        }
+
+
+         private void StackPlacedCellBack(GridCell gridCell)
+        {
+            m_stackCounter++;
+
+            if(m_stackCounter >= 3)
+            {
+                m_stackCounter = 0;
+                GenerateStacks();
+            }
+        }
+
+
         private void Start()
         {
             GenerateStacks();
