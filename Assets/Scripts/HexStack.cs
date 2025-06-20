@@ -8,6 +8,8 @@ namespace NamCore
     {
         public List<Hexagon> Hexagons { get; private set; }
 
+        public Color GetHexagonColor() => Hexagons[^1].Color;
+     
 
         public void Add(Hexagon hexagon)
         {

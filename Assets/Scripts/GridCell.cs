@@ -7,20 +7,21 @@ namespace NamCore
 
     public class GridCell : MonoBehaviour
     {
-        private HexStack m_stack;
+        public HexStack Stack { get; private set; }
 
 
       public bool IsOccupied { 
             
-            get => m_stack != null;
+            get => Stack != null;
 
 
-            private set { } }
+            private set { }
+        }
         
 
         public void AssignStack(HexStack stack)
         {
-            this.m_stack = stack;
+            Stack = stack;
 
         }
     }

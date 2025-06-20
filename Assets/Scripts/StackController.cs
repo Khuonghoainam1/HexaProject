@@ -92,7 +92,6 @@ namespace NamCore
             {
                 Debug.LogError("No ground detected, this is unusual......");
             }
-            Debug.Log("Here");
 
 
             Vector3 currentStackTargetPos = hit.point.With(y: 2);
@@ -143,12 +142,13 @@ namespace NamCore
             m_currentStack.transform.SetParent(m_targetCell.transform);
             m_currentStack.Place();
 
-
             m_targetCell.AssignStack(m_currentStack);
+            onStackPlanced?.Invoke(m_targetCell);
 
 
             m_targetCell = null;
-            onStackPlanced?.Invoke(m_targetCell);
+
+
             m_currentStack = null;
         }
         private Ray GetClickRay() => Camera.main.ScreenPointToRay(Input.mousePosition);

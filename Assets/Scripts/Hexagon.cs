@@ -17,6 +17,11 @@ namespace NamCore
             set => m_renderer.material.color = value;
         }
 
+        public void SetParent(Transform parent)
+        {
+            transform.SetParent(parent);
+        }
+
         public void Configure(HexStack hexStack)
         {
             HexStack = hexStack;
