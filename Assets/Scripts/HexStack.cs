@@ -9,7 +9,7 @@ namespace NamCore
         public List<Hexagon> Hexagons { get; private set; }
 
         public Color GetHexagonColor() => Hexagons[^1].Color;
-     
+
 
         public void Add(Hexagon hexagon)
         {
@@ -18,6 +18,7 @@ namespace NamCore
 
 
             Hexagons.Add(hexagon);
+            hexagon.SetParent(transform);
         }
 
         public void Place()
@@ -25,6 +26,19 @@ namespace NamCore
             foreach (Hexagon hexagon in Hexagons)
             {
                 hexagon.DisableCollider();
+            }
+        }
+
+
+        public bool Contains(Hexagon hexagon) => Hexagons.Contains(hexagon);
+
+        public void Remove(Hexagon hexagon)
+        {
+
+            Hexagons.Remove(hexagon);
+            if (Hexagons.Count <= 0)
+            {
+                DestroyImmediate(gameObject);
             }
         }
 

@@ -28,5 +28,22 @@ namespace NamCore
         }
 
         public void DisableCollider() => m_collider.enabled = false;
+
+
+        public void MoveToLocal(Vector3 targetLocalPos)
+        {
+            LeanTween.moveLocal(gameObject, targetLocalPos, .2f)
+                .setEase(LeanTweenType.easeInOutSine)
+                .setDelay(transform.GetSiblingIndex() * .01f)
+                .setOnComplete(() => Destroy(gameObject));
+        }
+
+        public void Vanish(float delay)
+        {
+            LeanTween.cancel(gameObject);
+            LeanTween.scale(gameObject, Vector3.zero, .2f)
+                .setEase(LeanTweenType.easeInBack)
+                .setDelay(delay);
+        }
     }
 }
