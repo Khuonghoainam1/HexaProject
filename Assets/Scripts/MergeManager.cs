@@ -205,10 +205,11 @@ namespace NamCore
             while (similarHexagons.Count > 0)
             {
 
-                similarHexagons[0].Vanish(delay);
                 similarHexagons[0].SetParent(null);
+                similarHexagons[0].Vanish(delay);
                 // DestroyImmediate(similarHexagons[0].gameObject);
                 delay += .01f;
+
                 gridCell.Stack.Remove(similarHexagons[0]);
                 similarHexagons.RemoveAt(0);
 
