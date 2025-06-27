@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8874037420511010685}
   - component: {fileID: 6295068168079390501}
   m_Layer: 9
-  m_Name: Grid Hex
+  m_Name: GridCell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68,6 +68,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b1a908b825a1f1459da048a04bb746e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hexagonPrefab: {fileID: 7355828661742426004, guid: 3c807f86a52de9948bd609f57e561760, type: 3}
+  hexagonColors: []
 --- !u!1001 &3718704825969821099
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -11,6 +11,18 @@ namespace NamCore
         public Color GetHexagonColor() => Hexagons[^1].Color;
 
 
+        public void Initialize()
+        {
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                Add(transform.GetChild(i).GetComponent<Hexagon>());
+
+            }
+
+
+            Place();
+        }
+
         public void Add(Hexagon hexagon)
         {
             if (Hexagons == null)

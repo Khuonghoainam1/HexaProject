@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
 
+#if UNITY_EDITOR
+using UnityEditor;
+
 namespace NamCore
 {
     public class GridGenerator : MonoBehaviour
@@ -28,9 +31,15 @@ namespace NamCore
                     if(spawnPos.magnitude > m_gird.CellToWorld(new Vector3Int(1, 0 , 0)).magnitude * m_girdSize){
                         continue;
                     }
-                    Instantiate(m_hexagon, spawnPos, Quaternion.identity, transform );
+                    GameObject gridHexInstance = (GameObject)PrefabUtility.InstantiatePrefab(m_hexagon);
+                    gridHexInstance.transform.position = spawnPos;
+                    gridHexInstance.transform.rotation = Quaternion.identity;
+                    gridHexInstance.transform.SetParent(transform);
+
+                   // Instantiate(m_hexagon, spawnPos, Quaternion.identity, transform );
                 }
             }
         }
     }
 }
+#endif

@@ -8,6 +8,10 @@ namespace NamCore
 {
     public class MergeManager : MonoBehaviour
     {
+
+        [Header("Element")]
+        private List<GridCell> updateCells = new List<GridCell>();
+
         private void Awake()
         {
             StackController.onStackPlanced += StackPlaceCallBack;
@@ -26,12 +30,21 @@ namespace NamCore
 
         IEnumerator StackPlaceCoroutine(GridCell gridCell)
         {
-            yield return CheckForMerge(gridCell);
+            updateCells.Add(gridCell);
+            while (updateCells.Count > 0)
+            {
+                yield return CheckForMerge(updateCells[0]);
+            }
+
+
 
         }
 
         IEnumerator CheckForMerge(GridCell gridCell)
         {
+            updateCells.Remove(gridCell);
+            if (!gridCell.IsOccupied) { yield break; }
+
             List<GridCell> neighborGridCells = GetNeighborGridCells(gridCell);
             if (neighborGridCells.Count <= 0)
             {
@@ -49,6 +62,9 @@ namespace NamCore
                 yield break;
             }
 
+
+            updateCells.AddRange(similarNeighborGridCells);
+
             Debug.Log($"Similar neighbors: {similarNeighborGridCells.Count}");
 
             List<Hexagon> hexagonsToAdd = GetHexagonsToAdd(gridCellTopHexagonColor, similarNeighborGridCells.ToArray());
@@ -63,28 +79,10 @@ namespace NamCore
 
 
 
-             yield return CheckForCompleteStack(gridCell, gridCellTopHexagonColor);
+            yield return CheckForCompleteStack(gridCell, gridCellTopHexagonColor);
         }
 
-        /*        private List<GridCell> GetNeighborGridCells(GridCell gridCell)
-                {
-                    LayerMask girdCellMark = 1 << gridCell.gameObject.layer;
-                    List<GridCell> neighborGridCells = new List<GridCell>();
-
-                    Collider[] neighborGridCellColliders = Physics.OverlapSphere(gridCell.transform.position, 2, girdCellMark);
-
-
-                    foreach (Collider gridCellCollider in neighborGridCellColliders)
-                    {
-                        GridCell neighborGridCell = gridCellCollider.GetComponent<GridCell>();
-                        if (neighborGridCell == null || neighborGridCell == gridCell || !neighborGridCell.IsOccupied)
-                            continue;
-
-                        neighborGridCells.Add(neighborGridCell);
-                    }
-
-                    return neighborGridCells;
-                }*/
+        //Tìm các ô lân cận
         private List<GridCell> GetNeighborGridCells(GridCell gridCell)
         {
             LayerMask gridCellMask = 1 << gridCell.gameObject.layer;
@@ -96,7 +94,7 @@ namespace NamCore
             foreach (Collider gridCellCollider in neighborGridCellColliders)
             {
                 GridCell neighborGridCell = gridCellCollider.GetComponent<GridCell>();
-
+                // gridcell xung quanh 
                 if (neighborGridCell == null)
                     continue;
 
@@ -112,7 +110,7 @@ namespace NamCore
             return neighborGridCells;
         }
 
-
+        // Lọc các ô có cùng màu
         private List<GridCell> GetSimilarNeighborGridCells(Color gridCellTopHexagonColor, GridCell[] neighborGridCells)
         {
             List<GridCell> similarNeighborGridCells = new List<GridCell>();
@@ -125,13 +123,13 @@ namespace NamCore
                 }
             }
             return similarNeighborGridCells;
-        }
-
+            }
+            // Lấy các Hexagon cùng màu từ stack các ô giống
         private List<Hexagon> GetHexagonsToAdd(Color gridCellTopHexagonColor, GridCell[] similarNeighborGridCells)
         {
             List<Hexagon> hexagonsToAdd = new List<Hexagon>();
             foreach (GridCell neighborCell in similarNeighborGridCells)
-            {
+            {                                               
                 HexStack neighborStack = neighborCell.Stack;
                 for (int i = neighborStack.Hexagons.Count - 1; i >= 0; i--)
                 {
@@ -147,13 +145,13 @@ namespace NamCore
             return hexagonsToAdd;
         }
 
-
-        private void RemoveHexagonFromStack(List<Hexagon> hexagonsToAdd, GridCell[] similarNeighborGridCells)
+        //Xoá Hexagon khỏi stack cũ
+        private void RemoveHexagonFromStack(List<Hexagon> hexagonsToRemove, GridCell[] similarNeighborGridCells)
         {
             foreach (GridCell neighborCell in similarNeighborGridCells)
             {
                 HexStack stacks = neighborCell.Stack;
-                foreach (Hexagon hexagon in hexagonsToAdd)
+                foreach (Hexagon hexagon in hexagonsToRemove)
                 {
                     if (stacks.Contains(hexagon))
                         stacks.Remove(hexagon);
@@ -161,7 +159,7 @@ namespace NamCore
             }
         }
 
-
+        //Thêm và di chuyển Hexagon về stack mới
         private void MoveHexagons(GridCell gridCell, List<Hexagon> hexagonsToAdd)
         {
             float initialY = gridCell.Stack.Hexagons.Count * .2f;
@@ -177,7 +175,7 @@ namespace NamCore
             }
         }
 
-
+        // Kiểm tra stack có đủ 10 Hexagon cùng màu không
         private IEnumerator CheckForCompleteStack(GridCell gridCell, Color topColor)
         {
             if (gridCell.Stack.Hexagons.Count < 10)
@@ -215,8 +213,27 @@ namespace NamCore
 
             }
 
-
+            updateCells.Add(gridCell);
             yield return new WaitForSeconds(.2f + (simlarHexagonsCount + 1) * .01f);
         }
     }
 }
+
+
+
+/*Stack được đặt vào GridCell
+   ↓
+Gọi StackPlaceCallBack
+   ↓
+Bắt đầu StackPlaceCoroutine
+   ↓
+Thêm GridCell vào updateCells
+   ↓
+Gọi CheckForMerge (với GridCell đầu tiên trong danh sách)
+   ↓
+→ Nếu có các GridCell lân cận cùng màu:
+   → Di chuyển hexagons cùng màu về GridCell chính
+   → Xoá hexagons cũ khỏi stack cũ
+   → Kiểm tra stack mới có đủ 10 hexagons cùng màu không?
+     → Nếu có, gọi Vanish và tiếp tục vòng lặp
+→ Nếu không có lân cận hoặc không đủ, kết thúc*/
