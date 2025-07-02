@@ -67,7 +67,9 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _Fill_Percent: -5.6
+    - _Edge_Whith: 0
+    - _Edge_Width: -3
+    - _Fill_Percent: -4.3
     - _GlossMapScale: 1
     - _Glossiness: 0.14142138
     - _GlossyReflections: 1
@@ -82,8 +84,9 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 0.79058963, g: 0.79058963, b: 0.79058963, a: 1}
+    - _EdgeColor: {r: 1, g: 0.8002133, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Off_Color: {r: 0.2830189, g: 0.26032397, b: 0.26032397, a: 0}
+    - _Off_Color: {r: 0.3490566, g: 0.31448025, b: 0.31448025, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &1267649677463882547
 MonoBehaviour:

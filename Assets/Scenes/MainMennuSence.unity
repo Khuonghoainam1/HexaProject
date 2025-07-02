@@ -154,6 +154,7 @@ Transform:
   - {fileID: 963194228}
   - {fileID: 705507995}
   - {fileID: 2023638369}
+  - {fileID: 1721084404}
   - {fileID: 8072643756001178880}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -343,6 +344,60 @@ Transform:
   m_Children: []
   m_Father: {fileID: 560399257}
   m_LocalEulerAnglesHint: {x: 48.7, y: 0, z: 0}
+--- !u!1 &1721084403
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1721084404}
+  - component: {fileID: 1721084405}
+  m_Layer: 0
+  m_Name: Tower Animator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1721084404
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1721084403}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 543450651708334983}
+  m_Father: {fileID: 560399257}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1721084405
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1721084403}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a1fb171ff40508a4d8f86821b976860e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2023638365
 GameObject:
   m_ObjectHideFlags: 0
@@ -457,11 +512,11 @@ Transform:
   m_GameObject: {fileID: 919132147790903613}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.9707165, z: -0, w: 0.24022801}
-  m_LocalPosition: {x: 0.283, y: 0.26, z: -0.475}
-  m_LocalScale: {x: 0.024999999, y: 0.025, z: 0.024999999}
+  m_LocalPosition: {x: 0.656, y: 1.52, z: -4.69}
+  m_LocalScale: {x: 0.04999999, y: 0.05, z: 0.04999999}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 8072643756001178880}
+  m_Father: {fileID: 1721084404}
   m_LocalEulerAnglesHint: {x: 0, y: 152.2, z: 0}
 --- !u!1 &919132147790903613
 GameObject:
@@ -474,6 +529,8 @@ GameObject:
   - component: {fileID: 543450651708334983}
   - component: {fileID: 3469287837839961122}
   - component: {fileID: 1711813854852831464}
+  - component: {fileID: 3469287837839961124}
+  - component: {fileID: 3469287837839961123}
   m_Layer: 0
   m_Name: tower
   m_TagString: Untagged
@@ -537,6 +594,41 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132147790903613}
   m_Mesh: {fileID: -1277366460620338370, guid: baabdaeabd45b7347908b5a8b197c7f4, type: 3}
+--- !u!95 &3469287837839961123
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132147790903613}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a1fb171ff40508a4d8f86821b976860e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3469287837839961124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132147790903613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ca8674da0e54c449b1da8ef4eef6160, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1721084405}
+  fillIncrement: 1.36
 --- !u!33 &5163395857562122917
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -599,8 +691,7 @@ Transform:
   m_LocalPosition: {x: 0.09, y: 1, z: -3.74}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
-  m_Children:
-  - {fileID: 543450651708334983}
+  m_Children: []
   m_Father: {fileID: 560399257}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8884504843063521210
