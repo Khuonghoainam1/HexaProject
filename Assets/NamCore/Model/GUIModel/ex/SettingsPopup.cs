@@ -2,7 +2,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace NameCore
+namespace NamCore
 {
     public class SettingsPopup : PopupBase
     {

@@ -5,7 +5,7 @@ using System.IO;
 using UnityEditor;
 #endif
 
-namespace NameCore
+namespace NamCore
 {
     /// <summary>
     /// Quản lý việc lưu, tải dữ liệu game dạng JSON.

@@ -1,9 +1,9 @@
 using UnityEngine;
-namespace NameCore
+namespace NamCore
 {
     public enum SenceID
     {
-        MennuSence,
+        MainMennu,
         GameplayScene,
         GameOverScene
     }

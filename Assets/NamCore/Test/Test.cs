@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace NameCore
+namespace NamCore
 {
     /// <summary>
     /// Mô tả chức năng của class này. Ví dụ: Điều khiển hành vi nhân vật, xử lý hiệu ứng, v.v.

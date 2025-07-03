@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace NameCore
+namespace NamCore
 {
     /// <summary>
     /// Provides an easy way to reuse to ensure that only a 

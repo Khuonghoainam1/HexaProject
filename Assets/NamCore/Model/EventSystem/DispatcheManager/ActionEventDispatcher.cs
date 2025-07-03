@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEditor.PackageManager;
 using UnityEngine;
 
-namespace NameCore
+namespace NamCore
 {
     public class ActionEventDispatcher : Singleton<ActionEventDispatcher>
     {

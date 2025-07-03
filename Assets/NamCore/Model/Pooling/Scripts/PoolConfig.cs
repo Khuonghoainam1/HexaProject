@@ -2,7 +2,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-namespace NameCore
+namespace NamCore
 {
     [CreateAssetMenu(fileName = "PoolConfig", menuName = "NamCore/Pooling")]
     public class PoolConfig : ScriptableObject

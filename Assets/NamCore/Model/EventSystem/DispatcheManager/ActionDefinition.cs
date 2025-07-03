@@ -1,5 +1,5 @@
 
-namespace NameCore
+namespace NamCore
 {
     public enum EventGamePlay
     {

@@ -2,7 +2,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-namespace NameCore
+namespace NamCore
 {
     public class PoolManager : MonoBehaviour
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace NameCore
+namespace NamCore
 {
 
     public interface IPoolable

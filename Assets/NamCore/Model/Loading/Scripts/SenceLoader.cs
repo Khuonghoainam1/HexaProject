@@ -2,7 +2,7 @@
 using UnityEngine.SceneManagement;
 using System.Collections;
 using UnityEngine.UIElements;
-namespace NameCore
+namespace NamCore
 {
     public class SenceLoader : Singleton<SenceLoader>
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-namespace NameCore
+namespace NamCore
 {
     public class TestMennu  : PopupBase
     {

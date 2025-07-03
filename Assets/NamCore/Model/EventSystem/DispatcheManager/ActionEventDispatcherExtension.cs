@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-namespace NameCore
+namespace NamCore
 {
     public static class ActionEventDispatcherExtension
     {

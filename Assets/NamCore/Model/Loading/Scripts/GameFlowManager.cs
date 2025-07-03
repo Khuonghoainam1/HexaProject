@@ -1,7 +1,5 @@
-﻿using NameCore.GMN;
-using NameCore;
-using UnityEngine;
-namespace NameCore
+﻿using UnityEngine;
+namespace NamCore
 {
     public class GameFlowManager : MonoBehaviour
     {
@@ -31,7 +29,7 @@ namespace NameCore
         public void GoToMenu()
         {
             CurrentState = GameState.MainMennu;
-            SenceLoader.Ins.LoadSence(SenceID.MennuSence);
+            SenceLoader.Ins.LoadSence(SenceID.MainMennu);
         }
 
         public void StartGame()

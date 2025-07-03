@@ -1,6 +1,6 @@
 using System;
 using UnityEngine;
-namespace NameCore
+namespace NamCore
 {
     public abstract class PopupBase : MonoBehaviour
     {

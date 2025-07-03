@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-namespace NameCore
+namespace NamCore
 {
 
     public class PopupManager : MonoBehaviour

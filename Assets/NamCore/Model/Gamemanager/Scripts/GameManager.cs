@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace NameCore.GMN
+namespace NamCore
 {
     /// <summary>
     ///Game manager
@@ -12,11 +12,13 @@ namespace NameCore.GMN
         GamePlay,
         GamePause,
         GameOver,
+        Loading,
+
     }
     public class GameManager : Singleton<GameManager>
     {
         #region Fields
-        private GameState m_currentState;
+        [SerializeField] private GameState m_currentState;
         #endregion
         
         #region Public Methods
