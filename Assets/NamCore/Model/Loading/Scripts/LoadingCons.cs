@@ -4,7 +4,7 @@ namespace NamCore
     public enum SenceID
     {
         MainMennu,
-        GameplayScene,
+        GamePlay,
         GameOverScene
     }
     public class LoadingCons

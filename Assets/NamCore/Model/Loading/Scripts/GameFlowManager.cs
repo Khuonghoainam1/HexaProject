@@ -35,7 +35,7 @@ namespace NamCore
         public void StartGame()
         {
             CurrentState = GameState.GamePlay;
-            SenceLoader.Ins.LoadSence(SenceID.GameplayScene);
+            SenceLoader.Ins.LoadSence(SenceID.GamePlay);
         }
 
       /*  public void EndGame()

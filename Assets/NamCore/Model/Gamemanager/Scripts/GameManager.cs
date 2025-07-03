@@ -20,7 +20,7 @@ namespace NamCore
         #region Fields
         [SerializeField] private GameState m_currentState;
         #endregion
-        
+
         #region Public Methods
         public GameState CurrentState { get => m_currentState; set => m_currentState = value; }
         #endregion
@@ -58,6 +58,15 @@ namespace NamCore
         public void ResetGame()
         {
             ChangeState(GameState.MainMennu);
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                GameFlowManager.Instance.StartGame();
+            }
+
         }
         #endregion
     }
