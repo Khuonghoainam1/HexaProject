@@ -64,6 +64,7 @@ namespace NamCore
             m_renderer.material.color = GameManager.Ins.levelData.configLevelData[0].GetColorByID(colorID);
         }
 
+        
 
     }
 }

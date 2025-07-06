@@ -16,6 +16,24 @@ namespace NamCore
         public PlayerProgress progress = new();
         public List<StackData> stacks = new();
         public int stackCounter = 0;
+
+        public List<GridData> gridData = new();
+        public List<GridCellData> gridCells = new();
+    }
+
+    [System.Serializable]
+    public class GridData
+    {
+        public int amout;
+        public List<HexagonData> hexagonDatas = new();
+    }
+
+
+    [System.Serializable]
+    public class GridCellData
+    {
+        public Vector2Int gridPosition; // hoặc string ID
+        public StackData stack;
     }
 
     [System.Serializable]
@@ -28,11 +46,15 @@ namespace NamCore
     [System.Serializable]
     public class HexagonData
     {
-        public string colorHex;
+        public ColorID colorID;
+        public int orderInStack;
     }
 
+
+
+
     [Serializable]
-    public class PlayerResources 
+    public class PlayerResources
     {
         public List<ResourceEntry> entries = new();
 
@@ -55,7 +77,7 @@ namespace NamCore
 
         public void Add(ResoucrType type, int delta)
         {
-            Set(type,Get(type)+ delta);
+            Set(type, Get(type) + delta);
         }
     }
 
@@ -132,6 +154,9 @@ namespace NamCore
         public int stars;
         public bool isUnlocked;
     }
+
+
+
 
     [Serializable]
 

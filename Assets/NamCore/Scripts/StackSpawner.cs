@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -41,12 +41,21 @@ namespace NamCore
                 m_stackCounter = 0;
                 GenerateStacks();
             }
+            SaveStacks();
         }
 
 
         private void Start()
         {
-            GenerateStacks();
+            // Nếu có dữ liệu stack đã lưu thì Load, ngược lại Generate mới
+            if (DataManager.Instance.Data != null && DataManager.Instance.Data.stacks != null && DataManager.Instance.Data.stacks.Count > 0)
+            {
+                LoadStacks();
+            }
+            else
+            {
+                GenerateStacks();
+            }
         }
         private void GenerateStacks()
         {
@@ -83,6 +92,71 @@ namespace NamCore
                 hexStack.Add(hexagonIntance);
             }
         }
+
+        public void SaveStacks()
+        {
+            var data = DataManager.Instance.Data;
+            data.stacks.Clear(); // Xoá cũ trước
+            data.stackCounter = m_stackCounter;
+
+            for (int i = 0; i < m_stackPositionParent.childCount; i++)
+            {
+                Transform stackParent = m_stackPositionParent.GetChild(i);
+                HexStack hexStack = stackParent.GetComponentInChildren<HexStack>();
+
+                if (hexStack == null) continue;
+
+                StackData stackData = new StackData();
+                stackData.stackIndex = i;
+
+                foreach (Hexagon hex in hexStack.Hexagons)
+                {
+                    stackData.hexagons.Add(new HexagonData { colorID = hex.colorID });
+                }
+
+                data.stacks.Add(stackData);
+            }
+
+            DataManager.Instance.SaveData();
+        }
+
+        public void LoadStacks()
+        {
+            var data = DataManager.Instance.Data;
+
+            // Xoá stack hiện tại
+            for (int i = 0; i < m_stackPositionParent.childCount; i++)
+            {
+                Transform stackParent = m_stackPositionParent.GetChild(i);
+                foreach (Transform child in stackParent)
+                {
+                    Destroy(child.gameObject);
+                }
+            }
+
+            m_stackCounter = data.stackCounter;
+
+            foreach (var stackData in data.stacks)
+            {
+                Transform stackParent = m_stackPositionParent.GetChild(stackData.stackIndex);
+                HexStack hexStack = Instantiate(m_hexagonStack, stackParent.position, Quaternion.identity, stackParent);
+                hexStack.name = $"Stack {stackData.stackIndex}";
+
+                for (int i = 0; i < stackData.hexagons.Count; i++)
+                {
+                    Vector3 hexagonLocalPos = Vector3.up * i * .2f;
+                    Vector3 spawnPos = hexStack.transform.TransformPoint(hexagonLocalPos);
+
+                    Hexagon hexInstance = Instantiate(m_hexagonPrefab, spawnPos, Quaternion.identity, hexStack.transform);
+                    hexInstance.colorID = stackData.hexagons[i].colorID;
+                    hexInstance.GetColor();
+
+                    hexInstance.Configure(hexStack);
+                    hexStack.Add(hexInstance);
+                }
+            }
+        }
+
 
     }
 }
