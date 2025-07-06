@@ -14,7 +14,9 @@ namespace NamCore
         [Header("Settings")]
         [OnValueChanged("GenerateInitalHexagons")]
         [SerializeField] private Color[] hexagonColors;
-
+        [SerializeField] public Renderer renderer;
+        [SerializeField] public Material onMaterial;
+        [SerializeField] public Material offMaterial;
 
         public HexStack Stack { get; private set; }
 
@@ -28,6 +30,8 @@ namespace NamCore
             private set { }
         }
 
+
+   
         private void Start()
         {
             if (hexagonColors.Length > 0)

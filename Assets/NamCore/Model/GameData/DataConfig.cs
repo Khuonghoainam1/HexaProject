@@ -14,7 +14,23 @@ namespace NamCore
         public PlayerResources resources = new();
         public GameSetting settings = new();
         public PlayerProgress progress = new();
+        public List<StackData> stacks = new();
+        public int stackCounter = 0;
     }
+
+    [System.Serializable]
+    public class StackData
+    {
+        public int stackIndex;
+        public List<HexagonData> hexagons = new();
+    }
+
+    [System.Serializable]
+    public class HexagonData
+    {
+        public string colorHex;
+    }
+
     [Serializable]
     public class PlayerResources 
     {

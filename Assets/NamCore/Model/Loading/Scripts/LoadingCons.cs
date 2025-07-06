@@ -5,7 +5,8 @@ namespace NamCore
     {
         MainMennu,
         GamePlay,
-        GameOverScene
+        GameOverScene,
+        Loading,
     }
     public class LoadingCons
     {

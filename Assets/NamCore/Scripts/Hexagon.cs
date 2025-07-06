@@ -9,6 +9,8 @@ namespace NamCore
         [Header("Element")]
         [SerializeField] private new  Renderer m_renderer;
         [SerializeField] private new  Collider m_collider;
+
+        public ColorID colorID;
         public HexStack HexStack {  get; private set; }
 
         public Color Color
@@ -56,6 +58,9 @@ namespace NamCore
                 .setDelay(delay);
         }
 
-   
+        public void GetColor()
+        {
+            m_renderer.material.color = GameManager.Ins.levelData.configLevelData[0].GetColorByID(colorID);
+        }
     }
 }

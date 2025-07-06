@@ -61,12 +61,13 @@ namespace NamCore
             HexStack hexStack = Instantiate(m_hexagonStack, stackPositionParent.position, Quaternion.identity, stackPositionParent);
             hexStack.name = $"Stack {stackPositionParent.GetSiblingIndex()}";
 
+            var _levelCtrl = GameManager.Ins.levelData.configLevelData[0];
             Color stackCorlor = colors[Random.Range(0, colors.Length)];
 
             int amount = Random.Range(minMaxHexCount.x, minMaxHexCount.y);
             int firstColorHexagonCount = Random.Range(0, amount);
-
-            Color[] colorArray = GetRandomColor();
+            ColorID[] colorIDArr = _levelCtrl.GetRandomColorIDs();
+          //  Color[] colorArray = GetRandomColor();
 
             for (int i = 0; i < amount; i++)
             {
@@ -75,10 +76,12 @@ namespace NamCore
 
 
                 Hexagon hexagonIntance = Instantiate(m_hexagonPrefab, spawnerPosistion, Quaternion.identity, hexStack.transform);
-                hexagonIntance.Color = i < firstColorHexagonCount ? colorArray[0] : colorArray[1];
+                // hexagonIntance.Color = i < firstColorHexagonCount ? colorArray[0] : colorArray[1];
+                hexagonIntance.colorID = i < firstColorHexagonCount ? colorIDArr[0] : colorIDArr[1];
+                hexagonIntance.GetColor();
+
 
                 hexagonIntance.Configure(hexStack);
-
                 hexStack.Add(hexagonIntance);
             }
         }

@@ -19,6 +19,8 @@ namespace NamCore
     {
         #region Fields
         [SerializeField] private GameState m_currentState;
+        public int level;
+        public GlobalLevelDataSO levelData;
         #endregion
 
         #region Public Methods

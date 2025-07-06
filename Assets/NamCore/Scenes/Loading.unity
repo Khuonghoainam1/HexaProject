@@ -630,6 +630,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneName: 0
   m_currentState: 4
+  level: 0
+  levelData: {fileID: 11400000, guid: 69d4fd0f6212a1b49a74e17d9a4315df, type: 2}
 --- !u!1 &1772553312
 GameObject:
   m_ObjectHideFlags: 0

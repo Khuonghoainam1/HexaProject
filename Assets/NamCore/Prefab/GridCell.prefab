@@ -70,6 +70,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hexagonPrefab: {fileID: 7355828661742426004, guid: 3c807f86a52de9948bd609f57e561760, type: 3}
   hexagonColors: []
+  renderer: {fileID: 3081945139938904852}
+  onMaterial: {fileID: 2100000, guid: 57d3f1947bb7b774fb9c5c7f44a5b720, type: 2}
+  offMaterial: {fileID: 2100000, guid: d1e5f91a98a8ae04589354979fbbc51b, type: 2}
 --- !u!1001 &3718704825969821099
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -127,15 +130,28 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1827962891378790079, guid: e2effbf4af12a194680f94c34826f2db, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1827962891378790079, guid: e2effbf4af12a194680f94c34826f2db, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: fffe83222ac82e642b2d376f71cf83af, type: 2}
+      objectReference: {fileID: 2100000, guid: d1e5f91a98a8ae04589354979fbbc51b, type: 2}
+    - target: {fileID: 1827962891378790079, guid: e2effbf4af12a194680f94c34826f2db, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 57d3f1947bb7b774fb9c5c7f44a5b720, type: 2}
     m_RemovedComponents:
     - {fileID: 4005387274625517192, guid: e2effbf4af12a194680f94c34826f2db, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2effbf4af12a194680f94c34826f2db, type: 3}
+--- !u!23 &3081945139938904852 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1827962891378790079, guid: e2effbf4af12a194680f94c34826f2db, type: 3}
+  m_PrefabInstance: {fileID: 3718704825969821099}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4219424362028281979 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 654453837585020368, guid: e2effbf4af12a194680f94c34826f2db, type: 3}

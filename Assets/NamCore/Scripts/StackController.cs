@@ -60,6 +60,8 @@ namespace NamCore
             }
 
             m_currentStack = hit.collider.GetComponent<Hexagon>().HexStack;
+
+         
             m_currentHexStackInitialPos = m_currentStack.transform.position;
         }
 
@@ -109,7 +111,8 @@ namespace NamCore
             GridCell gridCell = hit.collider.GetComponent<GridCell>();
 
             if (gridCell.IsOccupied)
-                DraggingAboveGround();
+              {  DraggingAboveGround();
+            }
             else
                 DraggingAboveNonOccupiedGridCell(gridCell);
         }
@@ -125,6 +128,7 @@ namespace NamCore
                 Time.deltaTime * 30);
 
            m_targetCell = gridCell;
+            //gridCell.renderer.material = gridCell.onMaterial;
 
         }
 
