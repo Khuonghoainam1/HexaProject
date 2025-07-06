@@ -52,9 +52,10 @@ namespace NamCore
                 yield break;
             }
 
-            Color gridCellTopHexagonColor = gridCell.Stack.GetHexagonColor();
+            /*      Color gridCellTopHexagonColor = gridCell.Stack.GetHexagonColor();*/
+            ColorID gridCellTopHexagonColorID = gridCell.Stack.GetColorID();
 
-            List<GridCell> similarNeighborGridCells = GetSimilarNeighborGridCells(gridCellTopHexagonColor, neighborGridCells.ToArray());
+            List<GridCell> similarNeighborGridCells = GetSimilarNeighborGridCells(gridCellTopHexagonColorID, neighborGridCells.ToArray());
 
             if (similarNeighborGridCells.Count <= 0)
             {
@@ -67,7 +68,7 @@ namespace NamCore
 
             Debug.Log($"Similar neighbors: {similarNeighborGridCells.Count}");
 
-            List<Hexagon> hexagonsToAdd = GetHexagonsToAdd(gridCellTopHexagonColor, similarNeighborGridCells.ToArray());
+            List<Hexagon> hexagonsToAdd = GetHexagonsToAdd(gridCellTopHexagonColorID, similarNeighborGridCells.ToArray());
 
 
             RemoveHexagonFromStack(hexagonsToAdd, similarNeighborGridCells.ToArray());
@@ -79,7 +80,7 @@ namespace NamCore
 
 
 
-            yield return CheckForCompleteStack(gridCell, gridCellTopHexagonColor);
+            yield return CheckForCompleteStack(gridCell, gridCellTopHexagonColorID);
         }
 
         //Tìm các ô lân cận
@@ -111,12 +112,12 @@ namespace NamCore
         }
 
         // Lọc các ô có cùng màu
-        private List<GridCell> GetSimilarNeighborGridCells(Color gridCellTopHexagonColor, GridCell[] neighborGridCells)
+        private List<GridCell> GetSimilarNeighborGridCells(ColorID gridCellTopHexagonColor, GridCell[] neighborGridCells)
         {
             List<GridCell> similarNeighborGridCells = new List<GridCell>();
             foreach (GridCell neighborGridCell in neighborGridCells)
             {
-                Color neighborGridCellTopHexagonColor = neighborGridCell.Stack.GetHexagonColor();
+                ColorID neighborGridCellTopHexagonColor = neighborGridCell.Stack.GetColorID();
                 if (gridCellTopHexagonColor == neighborGridCellTopHexagonColor)
                 {
                     similarNeighborGridCells.Add(neighborGridCell);
@@ -125,7 +126,7 @@ namespace NamCore
             return similarNeighborGridCells;
             }
             // Lấy các Hexagon cùng màu từ stack các ô giống
-        private List<Hexagon> GetHexagonsToAdd(Color gridCellTopHexagonColor, GridCell[] similarNeighborGridCells)
+        private List<Hexagon> GetHexagonsToAdd(ColorID gridCellTopHexagonColor, GridCell[] similarNeighborGridCells)
         {
             List<Hexagon> hexagonsToAdd = new List<Hexagon>();
             foreach (GridCell neighborCell in similarNeighborGridCells)
@@ -134,7 +135,7 @@ namespace NamCore
                 for (int i = neighborStack.Hexagons.Count - 1; i >= 0; i--)
                 {
                     Hexagon hexagon = neighborStack.Hexagons[i];
-                    if (hexagon.Color != gridCellTopHexagonColor)
+                    if (hexagon.colorID != gridCellTopHexagonColor)
                         break;
 
                     hexagonsToAdd.Add(hexagon);
@@ -176,7 +177,7 @@ namespace NamCore
         }
 
         // Kiểm tra stack có đủ 10 Hexagon cùng màu không
-        private IEnumerator CheckForCompleteStack(GridCell gridCell, Color topColor)
+        private IEnumerator CheckForCompleteStack(GridCell gridCell, ColorID topColor)
         {
             if (gridCell.Stack.Hexagons.Count < 10)
                 yield break;
@@ -185,7 +186,8 @@ namespace NamCore
             for (int i = gridCell.Stack.Hexagons.Count - 1; i >= 0; i--)
             {
                 Hexagon hexagon = gridCell.Stack.Hexagons[i];
-                if (hexagon.Color != topColor)
+                if (hexagon.colorID != topColor)
+
                 {
                     break;
                 }
