@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace NamCore
 {
-    public class Hexagon : MonoBehaviour, IPoolable
+    public class Hexagon : MonoBehaviour
     {
         [Header("Element")]
         [SerializeField] private new  Renderer m_renderer;
@@ -64,14 +64,6 @@ namespace NamCore
             m_renderer.material.color = GameManager.Ins.levelData.configLevelData[0].GetColorByID(colorID);
         }
 
-        public void OnSpawn()
-        {
-            isActive = true;
-        }
 
-        public void OnDespawn()
-        {
-            PoolManager.Instance.Despawn(gameObject);
-        }
     }
 }
