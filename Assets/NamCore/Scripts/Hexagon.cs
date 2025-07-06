@@ -4,11 +4,12 @@ using UnityEngine;
 
 namespace NamCore
 {
-    public class Hexagon : MonoBehaviour
+    public class Hexagon : MonoBehaviour, IPoolable
     {
         [Header("Element")]
         [SerializeField] private new  Renderer m_renderer;
         [SerializeField] private new  Collider m_collider;
+        bool isActive ; 
 
         public ColorID colorID;
         public HexStack HexStack {  get; private set; }
@@ -61,6 +62,16 @@ namespace NamCore
         public void GetColor()
         {
             m_renderer.material.color = GameManager.Ins.levelData.configLevelData[0].GetColorByID(colorID);
+        }
+
+        public void OnSpawn()
+        {
+            isActive = true;
+        }
+
+        public void OnDespawn()
+        {
+            PoolManager.Instance.Despawn(gameObject);
         }
     }
 }

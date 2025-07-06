@@ -22,13 +22,13 @@ namespace NamCore
         {
             if (Input.GetKeyDown(KeyCode.U))
             {
-                GameObject bullet = PoolManager.Instance.Spawn(
+             /*   GameObject bullet = PoolManager.Instance.Spawn(
                     PoolerTarget.Combat,
                     PoolTyper.Bullet,
                     this.transform.position,
                     Quaternion.identity,
                     weaponTransform
-                );
+                );*/
             }
             if (Input.GetKeyDown(KeyCode.V))
             {

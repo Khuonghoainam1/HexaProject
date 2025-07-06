@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace NamCore
 {
-    public class HexStack : MonoBehaviour
+    public class HexStack : MonoBehaviour, IPoolable
     {
         public List<Hexagon> Hexagons { get; private set; }
        public Color GetHexagonColor() => Hexagons[^1].Color;
@@ -49,9 +49,19 @@ namespace NamCore
             Hexagons.Remove(hexagon);
             if (Hexagons.Count <= 0)
             {
-                DestroyImmediate(gameObject);
+                // DestroyImmediate(gameObject);
+                OnDespawn();
             }
         }
 
+        public void OnSpawn()
+        {
+           
+        }
+
+        public void OnDespawn()
+        {
+           PoolManager.Instance.Despawn(gameObject);
+        }
     }
 }

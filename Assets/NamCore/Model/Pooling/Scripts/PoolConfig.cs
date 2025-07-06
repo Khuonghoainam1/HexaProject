@@ -23,6 +23,8 @@ namespace NamCore
     {
         Enemy,
         Bullet,
+        Hexagon,    
+        HexagonStack,
         // Thêm các loại khác tại đây
     }
 

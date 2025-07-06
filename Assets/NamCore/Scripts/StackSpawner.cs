@@ -32,11 +32,11 @@ namespace NamCore
         }
 
 
-         private void StackPlacedCellBack(GridCell gridCell)
+        private void StackPlacedCellBack(GridCell gridCell)
         {
             m_stackCounter++;
 
-            if(m_stackCounter >= 3)
+            if (m_stackCounter >= 3)
             {
                 m_stackCounter = 0;
                 GenerateStacks();
@@ -67,7 +67,6 @@ namespace NamCore
             int amount = Random.Range(minMaxHexCount.x, minMaxHexCount.y);
             int firstColorHexagonCount = Random.Range(0, amount);
             ColorID[] colorIDArr = _levelCtrl.GetRandomColorIDs();
-          //  Color[] colorArray = GetRandomColor();
 
             for (int i = 0; i < amount; i++)
             {
@@ -76,7 +75,6 @@ namespace NamCore
 
 
                 Hexagon hexagonIntance = Instantiate(m_hexagonPrefab, spawnerPosistion, Quaternion.identity, hexStack.transform);
-                // hexagonIntance.Color = i < firstColorHexagonCount ? colorArray[0] : colorArray[1];
                 hexagonIntance.colorID = i < firstColorHexagonCount ? colorIDArr[0] : colorIDArr[1];
                 hexagonIntance.GetColor();
 
@@ -86,27 +84,5 @@ namespace NamCore
             }
         }
 
-        private Color[] GetRandomColor()
-        {
-            List<Color> colorList = new List<Color>();
-            colorList.AddRange(colors);
-            if (colorList.Count <= 0)
-            {
-                Debug.LogError("No Color Not Found");
-                return null;
-            }
-
-            Color fistColor = colorList.OrderBy(x => Random.value).First();
-            colorList.Remove(fistColor);
-
-            if (colorList.Count <= 0)
-            {
-                Debug.LogError("Only One color was found");
-                return null;
-            }
-            Color secondColor = colorList.OrderBy(x => Random.value).First();
-
-            return new Color[] { fistColor, secondColor };
-        }
     }
 }

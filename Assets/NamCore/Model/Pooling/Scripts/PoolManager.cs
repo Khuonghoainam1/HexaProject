@@ -19,6 +19,7 @@ namespace NamCore
         private Dictionary<PoolerTarget, Dictionary<PoolTyper, Queue<GameObject>>> poolDictionary;
         private Dictionary<PoolerTarget, Transform> targetContainers;
         private Dictionary<GameObject, PoolableReference> activeObjects;
+        private Dictionary<PoolTyper, Queue<GameObject>> poolDictionarys;
 
         public static PoolManager Instance { get; private set; }
 
@@ -96,12 +97,62 @@ namespace NamCore
             return obj;
         }
 
-        public GameObject Spawn(
-            PoolerTarget target,
-            PoolTyper poolType,
-            Vector3 position,
-            Quaternion rotation,
-            Transform parent = null){
+
+        public T Spawns<T>(
+PoolTyper poolType,
+Vector3 position,
+Quaternion rotation,
+Transform parent = null
+) where T : Component
+        {
+            if (!poolDictionarys.ContainsKey(poolType))
+            {
+                Debug.LogError($"Pool {poolType} not found!");
+                return null;
+            }
+
+            Queue<GameObject> poolQueue = poolDictionarys[poolType];
+
+            if (poolQueue.Count == 0 && globalSettings.autoExpand)
+            {
+                ExpandPools(poolType, parent);
+            }
+
+            if (poolQueue.Count == 0)
+            {
+                Debug.LogWarning($"Pool {poolType} is empty!");
+                return null;
+            }
+
+            GameObject obj = poolQueue.Dequeue();
+            SetupSpawnedObject(obj, position, rotation, parent);
+
+            // Tracking
+            var poolableRef = obj.GetComponent<PoolableReference>();
+            activeObjects.Add(obj, poolableRef);
+
+            T component = obj.GetComponent<T>();
+            if (component == null)
+            {
+                Debug.LogError($"Component of type {typeof(T)} not found on object in pool {poolType}");
+                return null;
+            }
+
+            return component;
+        }
+
+
+
+
+
+        public T Spawn<T>(
+                PoolerTarget target,
+                 PoolTyper poolType,
+                      Vector3 position,
+                 Quaternion rotation,
+                     Transform parent = null
+) where T : Component
+        {
             if (!poolDictionary.ContainsKey(target) || !poolDictionary[target].ContainsKey(poolType))
             {
                 Debug.LogError($"Pool {target}/{poolType} not found!");
@@ -110,7 +161,6 @@ namespace NamCore
 
             Queue<GameObject> poolQueue = poolDictionary[target][poolType];
 
-            // Auto expand nếu enabled
             if (poolQueue.Count == 0 && globalSettings.autoExpand)
             {
                 ExpandPool(target, poolType);
@@ -126,10 +176,74 @@ namespace NamCore
             SetupSpawnedObject(obj, position, rotation, parent);
 
             // Tracking
-            activeObjects.Add(obj, obj.GetComponent<PoolableReference>());
+            var poolableRef = obj.GetComponent<PoolableReference>();
+            activeObjects.Add(obj, poolableRef);
 
-            return obj;
+            // Trả về component kiểu T
+            T component = obj.GetComponent<T>();
+            if (component == null)
+            {
+                Debug.LogError($"Component of type {typeof(T)} not found on object in pool {target}/{poolType}");
+                return null;
+            }
+
+            return component;
         }
+
+
+
+        /*
+                public GameObject Spawn(
+                    PoolerTarget target,
+                    PoolTyper poolType,
+                    Vector3 position,
+                    Quaternion rotation,
+                    Transform parent = null)
+                {
+                    if (!poolDictionary.ContainsKey(target) || !poolDictionary[target].ContainsKey(poolType))
+                    {
+                        Debug.LogError($"Pool {target}/{poolType} not found!");
+                        return null;
+                    }
+
+                    Queue<GameObject> poolQueue = poolDictionary[target][poolType];
+
+                    // Auto expand nếu enabled
+                    if (poolQueue.Count == 0 && globalSettings.autoExpand)
+                    {
+                        ExpandPool(target, poolType);
+                    }
+
+                    if (poolQueue.Count == 0)
+                    {
+                        Debug.LogWarning($"Pool {target}/{poolType} is empty!");
+                        return null;
+                    }
+
+                    GameObject obj = poolQueue.Dequeue();
+                    SetupSpawnedObject(obj, position, rotation, parent);
+
+                    // Tracking
+                    activeObjects.Add(obj, obj.GetComponent<PoolableReference>());
+
+                    return obj;
+                }
+        */
+
+
+        private void ExpandPools( PoolTyper poolType, Transform parent)
+        {
+            Pool pool = poolConfig.lstPool.Find(p =>
+                p.poolID == poolType
+            );
+
+            if (pool != null)
+            {
+
+                GameObject newObj = CreatePooledObject(pool, parent);
+            }
+        }
+
 
         private void ExpandPool(PoolerTarget target, PoolTyper poolType)
         {
