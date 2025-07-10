@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,8 +18,8 @@ namespace NamCore
         {
             get => m_renderer.material.color;
             set => m_renderer.material.color = value;
-        }*/
-
+        }
+*/
         public void SetParent(Transform parent)
         {
             transform.SetParent(parent);
@@ -65,6 +65,5 @@ namespace NamCore
         }
 
         
-
     }
 }

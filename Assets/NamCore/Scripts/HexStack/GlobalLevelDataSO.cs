@@ -7,7 +7,7 @@ using UnityEngine;
 namespace NamCore
 {
 
-    [CreateAssetMenu(fileName = "LevelConfig", menuName = "HexaStack/ColorData", order = 1)]
+    [CreateAssetMenu(fileName = "LevelConfig", menuName = "HexaStack/ColorData", order = 0)]
 
     public class GlobalLevelDataSO : ScriptableObject
     {
