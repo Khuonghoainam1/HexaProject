@@ -92,11 +92,10 @@ namespace NamCore
                 hexStack.Add(hexagonIntance);
             }
         }
-
         public void SaveStacks()
         {
             var data = DataManager.Instance.Data;
-            data.stacks.Clear(); // Xoá cũ trước
+            data.stacks.Clear(); // Xoá dữ liệu cũ
             data.stackCounter = m_stackCounter;
 
             for (int i = 0; i < m_stackPositionParent.childCount; i++)
@@ -104,21 +103,26 @@ namespace NamCore
                 Transform stackParent = m_stackPositionParent.GetChild(i);
                 HexStack hexStack = stackParent.GetComponentInChildren<HexStack>();
 
-                if (hexStack == null) continue;
+                if (hexStack == null || hexStack.Hexagons == null || hexStack.Hexagons.Count == 0)
+                    continue;
 
-                StackData stackData = new StackData();
-                stackData.stackIndex = i;
-
-                foreach (Hexagon hex in hexStack.Hexagons)
+                StackData stackData = new StackData
                 {
-                    stackData.hexagons.Add(new HexagonData { colorID = hex.colorID });
-                }
+                    stackIndex = i,
+                    hexagons = new List<HexagonData>()
+                };
+
+                stackData.hexagons = hexStack.Hexagons
+       .Select(hex => new HexagonData(hex.colorID))
+       .ToList();
+
 
                 data.stacks.Add(stackData);
             }
 
             DataManager.Instance.SaveData();
         }
+
 
         public void LoadStacks()
         {

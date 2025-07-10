@@ -6,6 +6,7 @@ namespace NamCore
 {
     public enum ColorID
     {
+        None = 0,
         Red,
         Blue,
         Green,

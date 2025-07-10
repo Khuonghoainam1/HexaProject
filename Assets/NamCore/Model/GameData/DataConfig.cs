@@ -21,20 +21,8 @@ namespace NamCore
         public List<GridCellData> gridCells = new();
     }
 
-    [System.Serializable]
-    public class GridData
-    {
-        public int amout;
-        public List<HexagonData> hexagonDatas = new();
-    }
 
 
-    [System.Serializable]
-    public class GridCellData
-    {
-        public Vector2Int gridPosition; // hoặc string ID
-        public StackData stack;
-    }
 
     [System.Serializable]
     public class StackData
@@ -42,13 +30,7 @@ namespace NamCore
         public int stackIndex;
         public List<HexagonData> hexagons = new();
     }
-
-    [System.Serializable]
-    public class HexagonData
-    {
-        public ColorID colorID;
-        public int orderInStack;
-    }
+    
 
 
 
