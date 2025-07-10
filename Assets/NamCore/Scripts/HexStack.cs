@@ -7,7 +7,7 @@ namespace NamCore
     public class HexStack : MonoBehaviour
     {
         public List<Hexagon> Hexagons { get; private set; }
-       public Color GetHexagonColor() => Hexagons[^1].Color;
+   //    public Color GetHexagonColor() => Hexagons[^1].Color;
         public ColorID GetColorID() => Hexagons[^1].colorID;
 
         public void Initialize()

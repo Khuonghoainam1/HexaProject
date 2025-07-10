@@ -69,8 +69,6 @@ namespace NamCore
 
                 Hexagon hexagonInstance = Instantiate(hexagonPrefab, spawnPositon, Quaternion.identity);
 
-                hexagonInstance.Color = hexagonColors[i];
-
                 Stack.Add(hexagonInstance);
             }
         }

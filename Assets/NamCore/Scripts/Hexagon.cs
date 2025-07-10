@@ -14,11 +14,11 @@ namespace NamCore
         public ColorID colorID;
         public HexStack HexStack {  get; private set; }
 
-        public Color Color
+     /*   public Color Color
         {
             get => m_renderer.material.color;
             set => m_renderer.material.color = value;
-        }
+        }*/
 
         public void SetParent(Transform parent)
         {

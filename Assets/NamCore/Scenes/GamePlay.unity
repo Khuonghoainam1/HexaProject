@@ -163,7 +163,6 @@ GameObject:
   m_Component:
   - component: {fileID: 184596853}
   - component: {fileID: 184596854}
-  - component: {fileID: 184596855}
   m_Layer: 0
   m_Name: GirdGenerator
   m_TagString: Untagged
@@ -205,23 +204,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a239a349a1f63d4ea82fa756eb3715c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_grid: {fileID: 1751167496}
-  m_hexagonPrefab: {fileID: 8499235705832838296, guid: 2be8868713789a345aea4acfa85288d3, type: 3}
-  m_gridRadius: 1
---- !u!114 &184596855
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 184596852}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3b368b698138dc44b0bdd0ad473236c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_hexagonStackPrefab: {fileID: 4627919506242170179, guid: 4a351fe24bdb0994eb47271b434cff22, type: 3}
-  m_hexagonPrefab: {fileID: 7355828661742426004, guid: 3c807f86a52de9948bd609f57e561760, type: 3}
+  m_gird: {fileID: 1751167496}
+  m_hexagon: {fileID: 8499235705832838296, guid: 2be8868713789a345aea4acfa85288d3, type: 3}
+  m_girdSize: 0
 --- !u!4 &303929501 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2424191269316081620, guid: 2be8868713789a345aea4acfa85288d3, type: 3}
@@ -475,6 +460,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2424191269316081620, guid: 2be8868713789a345aea4acfa85288d3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6295068168079390501, guid: 2be8868713789a345aea4acfa85288d3, type: 3}
+      propertyPath: hexagonColors.Array.size
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8499235705832838296, guid: 2be8868713789a345aea4acfa85288d3, type: 3}
