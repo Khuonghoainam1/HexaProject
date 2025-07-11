@@ -66,7 +66,7 @@ namespace NamCore
         {
             if (Input.GetKeyDown(KeyCode.A))
             {
-                GameFlowManager.Instance.StartGame();
+                
             }
 
         }
