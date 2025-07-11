@@ -16,25 +16,21 @@ namespace NamCore
         public PlayerProgress progress = new();
         public List<StackData> stacks = new();
         public int stackCounter = 0;
+        public List<LevelGamePlayData> levelGamePlayData = new();
 
-        public List<GridData> gridData = new();
-        public List<GridCellData> gridCells = new();
     }
 
-    [System.Serializable]
-    public class GridData
+    [Serializable]
+    public class LevelGamePlayData
     {
-        public int amout;
-        public List<HexagonData> hexagonDatas = new();
+        public List<ColorGridCellData> cellData = new();
     }
-
-
-    [System.Serializable]
-    public class GridCellData
+    [Serializable]
+    public class ColorGridCellData
     {
-        public Vector2Int gridPosition; // hoặc string ID
-        public StackData stack;
+        public List<ColorID> color;
     }
+
 
     [System.Serializable]
     public class StackData

@@ -6,6 +6,8 @@ namespace NamCore
 {
     public class GridManager : MonoBehaviour
     {
+
+
         
     }
 }

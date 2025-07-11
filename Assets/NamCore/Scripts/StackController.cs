@@ -145,7 +145,6 @@ namespace NamCore
             m_currentStack.transform.position = m_targetCell.transform.position.With(y: .2f);
             m_currentStack.transform.SetParent(m_targetCell.transform);
             m_currentStack.Place();
-
             m_targetCell.AssignStack(m_currentStack);
             onStackPlanced?.Invoke(m_targetCell);
 

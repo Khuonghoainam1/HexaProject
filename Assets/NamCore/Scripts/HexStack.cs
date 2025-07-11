@@ -1,58 +1,70 @@
-using System.Collections;
+﻿using NamCore;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace NamCore
+public class HexStack : MonoBehaviour
 {
-    public class HexStack : MonoBehaviour
+    public List<Hexagon> Hexagons { get; private set; } = new();
+
+    public ColorID GetColorID()
     {
-        public List<Hexagon> Hexagons { get; private set; }
-   //    public Color GetHexagonColor() => Hexagons[^1].Color;
-        public ColorID GetColorID() => Hexagons[^1].colorID;
+        if (Hexagons.Count > 0)
+            return Hexagons[^1].colorID;
 
-        public void Initialize()
+        Debug.LogWarning("HexStack: Trying to get ColorID from an empty stack");
+        return default;
+    }
+/*
+    public ColorID[] GetAllColorIDs()
+    {
+
+        ColorID[] ids = new ColorID[Hexagons.Count];
+        
+        for (int i = 0; i < Hexagons.Count; i++)
         {
-            for (int i = 0; i < transform.childCount; i++)
-            {
-                Add(transform.GetChild(i).GetComponent<Hexagon>());
+            ids[i] = Hexagons[i].colorID;
+        }
+        return ids;
+    }*/
 
-            }
-
-
-            Place();
+    public void Initialize()
+    {
+        Hexagons.Clear();
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            Hexagon hex = transform.GetChild(i).GetComponent<Hexagon>();
+            if (hex != null)
+                Add(hex);
         }
 
-        public void Add(Hexagon hexagon)
+        Place();
+    }
+
+    public void Add(Hexagon hexagon)
+    {
+        if (Hexagons == null)
+            Hexagons = new List<Hexagon>();
+
+        Hexagons.Add(hexagon);
+        hexagon.SetParent(transform);
+    }
+
+    public void Place()
+    {
+        foreach (Hexagon hexagon in Hexagons)
         {
-            if (Hexagons == null)
-            { Hexagons = new List<Hexagon>(); }
-
-
-            Hexagons.Add(hexagon);
-            hexagon.SetParent(transform);
+            hexagon.DisableCollider();
         }
+    }
 
-        public void Place()
+    public bool Contains(Hexagon hexagon) => Hexagons.Contains(hexagon);
+
+    public void Remove(Hexagon hexagon)
+    {
+        Hexagons.Remove(hexagon);
+        if (Hexagons.Count <= 0)
         {
-            foreach (Hexagon hexagon in Hexagons)
-            {
-                hexagon.DisableCollider();
-            }
+            DestroyImmediate(gameObject);
         }
-
-
-        public bool Contains(Hexagon hexagon) => Hexagons.Contains(hexagon);
-
-        public void Remove(Hexagon hexagon)
-        {
-
-            Hexagons.Remove(hexagon);
-            if (Hexagons.Count <= 0)
-            {
-                 DestroyImmediate(gameObject);
-            }
-        }
-
-
     }
 }

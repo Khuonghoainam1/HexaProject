@@ -13,13 +13,16 @@ namespace NamCore
 
         public ColorID colorID;
         public HexStack HexStack {  get; private set; }
-
-     /*   public Color Color
+        public void OnEnable()
         {
-            get => m_renderer.material.color;
-            set => m_renderer.material.color = value;
         }
-*/
+
+        /*   public Color Color
+           {
+               get => m_renderer.material.color;
+               set => m_renderer.material.color = value;
+           }
+   */
         public void SetParent(Transform parent)
         {
             transform.SetParent(parent);
@@ -64,6 +67,10 @@ namespace NamCore
             m_renderer.material.color = GameManager.Ins.levelData.configLevelData[0].GetColorByID(colorID);
         }
 
+        public void GetColorById(ColorID colorID)
+        {
+            m_renderer.material.color = GameManager.Ins.levelData.configLevelData[0].GetColorByID(colorID);
+        }
         
     }
 }

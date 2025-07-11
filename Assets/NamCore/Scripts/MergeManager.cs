@@ -124,13 +124,13 @@ namespace NamCore
                 }
             }
             return similarNeighborGridCells;
-            }
-            // Lấy các Hexagon cùng màu từ stack các ô giống
+        }
+        // Lấy các Hexagon cùng màu từ stack các ô giống
         private List<Hexagon> GetHexagonsToAdd(ColorID gridCellTopHexagonColor, GridCell[] similarNeighborGridCells)
         {
             List<Hexagon> hexagonsToAdd = new List<Hexagon>();
             foreach (GridCell neighborCell in similarNeighborGridCells)
-            {                                               
+            {
                 HexStack neighborStack = neighborCell.Stack;
                 for (int i = neighborStack.Hexagons.Count - 1; i >= 0; i--)
                 {
@@ -154,8 +154,12 @@ namespace NamCore
                 HexStack stacks = neighborCell.Stack;
                 foreach (Hexagon hexagon in hexagonsToRemove)
                 {
+
                     if (stacks.Contains(hexagon))
-                        stacks.Remove(hexagon);
+                        {stacks.Remove(hexagon);
+                        neighborCell.hexagonColorIDGamePlay.Remove(hexagon.colorID);
+                    }
+
                 }
             }
         }
@@ -171,6 +175,7 @@ namespace NamCore
                 Vector3 targetLocalPosition = Vector3.up * targetY;
 
                 gridCell.Stack.Add(hexagon);
+                gridCell.hexagonColorIDGamePlay.Add(hexagon.colorID);
                 hexagon.MoveToLocal(targetLocalPosition);
 
             }
